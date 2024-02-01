@@ -13,7 +13,6 @@ export default function ShareLinkButton() {
     }, 1500);
   };
 
-  console.log(click);
   return (
     <button
       className="flex gap-1 items-center border-2 rounded-lg px-2 hover:bg-white hover:border-black"
