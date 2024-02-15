@@ -1,34 +1,36 @@
 import Header from "@/components/Header";
 import ShareLinkButton from "@/components/ShareLinkButton";
-import { getReviews } from "@/lib/reviews";
+import {getReview, getSlugs} from "@/lib/reviews";
 
-export async function generateMetadata({ params: { slug } }) {
-  const {
-    data: { title },
-  } = await getReviews(slug);
+export async function generateStaticParams() {
+  const slugs = await getSlugs();
+  return slugs;
+}
+export async function generateMetadata({params: {slug}}) {
+  const {title} = await getReview(slug);
   return {
     title,
   };
 }
-export default async function ReviewsPage({ params: { slug } }) {
-  console.log(slug);
-  const { html, data } = await getReviews(slug);
+
+export default async function ReviewsPage({params: {slug}}) {
+  const {title, date, image, body} = await getReview(slug);
   return (
     <>
-      <Header>{data.title}</Header>
+      <Header>{title}</Header>
       <div className="flex gap-3 items-baseline my-2">
-        <p>{data.date}</p>
+        <p>{date}</p>
         <ShareLinkButton />
       </div>
       <img
-        src={data.image}
+        src={image}
         className="rounded mb-2"
         alt="Scary King"
         width="640"
         height="340"
       />
       <article
-        dangerouslySetInnerHTML={{ __html: html }}
+        dangerouslySetInnerHTML={{__html: body}}
         className="prose prose-slate max-w-screen-sm"
       />
     </>
