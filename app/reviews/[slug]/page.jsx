@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import ShareLinkButton from "@/components/ShareLinkButton";
 import {getReview, getSlugs} from "@/lib/reviews";
+import Image from "next/image";
 
 export async function generateStaticParams() {
   const slugs = await getSlugs();
@@ -22,8 +23,9 @@ export default async function ReviewsPage({params: {slug}}) {
         <p>{date}</p>
         <ShareLinkButton />
       </div>
-      <img
+      <Image
         src={image}
+        priority
         className="rounded mb-2"
         alt="Scary King"
         width="640"
