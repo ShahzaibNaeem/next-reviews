@@ -13,7 +13,7 @@ export default async function HomePage() {
 
       <ul className="flex flex-col gap-3">
         {reviews.map((review, index) => {
-          const {slug, image, title} = review;
+          const {slug, image, title, subtitle} = review;
           return (
             <li
               key={slug}
@@ -31,7 +31,10 @@ export default async function HomePage() {
                   width="320"
                   height="180"
                 />
-                <h2 className="font-semibold py-1 sm:px-3">{title}</h2>
+                <div className="px-2 py-1 sm:text-left">
+                  <h2 className="font-semibold ">{title}</h2>
+                  <p className="hidden sm:block">{subtitle}</p>
+                </div>
               </Link>
             </li>
           );
