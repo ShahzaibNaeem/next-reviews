@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import {getReviews} from "@/lib/reviews";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Reviews",
   description: "Only the Best games in the World",
@@ -10,6 +12,7 @@ export const metadata = {
 
 export default async function ReviewsPage() {
   const reviews = await getReviews(6);
+  console.log("[ReviewsPage]", reviews.map((review) => review.slug).join());
   return (
     <>
       <Header>Reviews Page</Header>
