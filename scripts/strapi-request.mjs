@@ -3,11 +3,12 @@ import {stringify} from "qs";
 
 const toAppend = stringify(
   {
-    fields: ["slug", "title", "subtitle", "publishedAt", "body"],
+    fields: ["slug", "title", "subtitle", "publishedAt"],
     populate: {image: {fields: ["url"]}},
+    sort: ["publishedAt:desc"],
     pagination: {
-      pageSize: 1,
-      withCount: false,
+      pageSize: 6,
+      page: 1,
     },
   },
   {encodeValuesOnly: true}
